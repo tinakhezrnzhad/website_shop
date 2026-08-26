@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Tina Shop</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/store.css') }}">
+        <!-- <link rel="stylesheet" href="/static/css/store.css"> -->
+        <meta name="viewport" content="with=device-width , initial-scale=1.0">
+    </head>
+
+<body>
+
+<header>
+
+    <div class="topbar">
+
+        <div class="navbar-fixed">  
+          <h1 class="logo">☆꧁𝓉ίŇ𝓪꧂☆</h1> 
+        </div>
+
+        
+        <nav class="top-links">
+             <a href="./about.html">About Us</a>
+             <a href="./places.html">Other Places</a> 
+        </nav>
+
+        <div class="search-box">
+            <input type="text" placeholder="Search product...">
+            <button>Search</button>
+        </div>
+
+        <div class="phone">
+            <label>Phone Number:</label>
+
+            <select>
+                <option>09999999999</option>
+                <option>09123456789</option>
+            </select>
+
+        </div>
+
+    </div>
+
+    <section class="welcome">
+         <h2>🌸 Welcome To Tina Shop 🌸</h2>
+         <p>Find your favorite products here!</p> 
+    </section>
+
+</header>
+
+
+<section class="banner">
+
+    <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Banner Image">
+
+</section>
+
+
+<div class="buttons">
+
+    <a href="">Sign In </a>
+    <a href="">Log In </a>
+    <a href="{{ url_for('show_products') }}">Show products</a>
+    <a href="">What you buy </a>
+    <a href="">Conversation</a>
+
+</div>
+
+</body>
+
+</html>
