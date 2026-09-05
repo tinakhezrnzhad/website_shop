@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Tina Shop - Cart</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/cart.css') }}">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="topbar">
+        <div class="navbar-fixed">
+            <h1 class="logo"> Tina Shop </h1>
+        </div>
+
+        <nav class="top-links">
+            <a href="{{ url_for('index') }}"> Home</a>
+            <a href="./places.html">Other Places</a>
+        </nav>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                placeholder="Search product..."
+            >
+
+            <button type="button">
+                Search
+            </button>
+
+        </div>
+
+
+        <!-- Phone -->
+
+        <div class="phone">
+
+            <label>
+                Phone Number:
+            </label>
+
+            <select>
+
+                <option>
+                    09999999999
+                </option>
+
+                <option>
+                    09123456789
+                </option>
+
+            </select>
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     CART
+========================= -->
+
+<section class="product-container">
+
+
+    <!-- =========================
+         CART SUMMARY
+    ========================= -->
+
+    {% if products %}
+
+    <div class="cart-summary">
+
+
+        <!-- Summary Title -->
+
+        <div class="summary-title">
+
+            🛒 Cart Summary
+
+        </div>
+
+
+        <!-- Grand Total -->
+
+        <div class="summary-total">
+
+            <span>
+                Grand Total
+            </span>
+
+            <strong>
+
+                {{ "{:,.0f}".format(grand_total) }} تومان
+
+            </strong>
+
+        </div>
+
+
+        <!-- Payment Button -->
+
+        <form action="{{ url_for('checkout_O') }}" method="POST">
+            <button type="submit" class="payment-button">
+                💳 Payment
+            </button>
+        </form>
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- =========================
+         PAGE TITLE
+    ========================= -->
+
+    <h2>
+        Your Cart
+    </h2>
+
+
+
+    <!-- =========================
+         PRODUCTS LIST
+    ========================= -->
+
+    <div class="products-grid">
+
+
+        {% for item in products %}
+
+
+        <!-- =========================
+             PRODUCT CARD
+        ========================= -->
+
+        <article class="product-card">
+
+
+            <!-- =====================
+                 PRODUCT IMAGE
+            ====================== -->
+
+            <div class="product-image">
+
+                {% if item.product.image_file %}
+
+                    <img
+                        src="{{ url_for(
+                            'static',
+                            filename='uploads/' + item.product.image_file
+                        ) }}"
+                        alt="{{ item.product.name }}"
+                    >
+
+                {% else %}
+
+                    <img
+                        src="{{ url_for(
+                            'static',
+                            filename='images/no-image.jpg'
+                        ) }}"
+                        alt="No Image Available"
+                    >
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- =====================
+                 PRODUCT INFORMATION
+            ====================== -->
+
+            <div class="product-info">
+
+                <h3>
+                    {{ item.product.name }}
+                </h3>
+
+
+                <p class="description">
+
+                    {{ item.product.description }}
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =====================
+                 PRODUCT PRICE
+            ====================== -->
+
+            <div class="product-price">
+
+                <p>
+
+                    {{ "{:,.0f}".format(item.product.price) }}
+
+                    تومان
+
+                </p>
+
+
+                <!-- Price × Quantity -->
+
+                <p class="item-total">
+
+                    Total:
+
+                    {{ "{:,.0f}".format(item.total) }}
+
+                    تومان
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =====================
+                 QUANTITY + EDIT
+            ====================== -->
+
+            <div class="product-quantity">
+
+                <label>
+                    Quantity:
+                </label>
+
+
+                <form
+                    action="{{ url_for(
+                        'update_cart',
+                        product_id=item.product.id
+                    ) }}"
+                    method="POST"
+                >
+
+                    <input
+                        type="number"
+                        name="quantity"
+                        value="{{ item.quantity }}"
+                        min="1"
+                        required
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="edit-button"
+                    >
+
+                        Edit
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =====================
+                 DELETE
+            ====================== -->
+
+            <div class="product-delete">
+
+                <form
+                    action="{{ url_for(
+                        'remove_from_cart',
+                        product_id=item.product.id
+                    ) }}"
+                    method="POST"
+                >
+
+                    <button
+                        type="submit"
+                        class="delete-button"
+                    >
+
+                        Delete
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+        </article>
+
+
+        {% else %}
+
+
+        <!-- =========================
+             EMPTY CART
+        ========================= -->
+
+        <p class="empty-message">
+
+            No purchases found.
+
+        </p>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+</section>
+
+
+</body>
+
+</html>

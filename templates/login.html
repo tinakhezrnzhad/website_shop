@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <title>Tina Shop log in</title>
+    <!-- <link rel="stylesheet" href="/static/css/signin.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+    <meta name="viewport" content="with=device-width , initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="title">ورود کاربران </h2>
+
+        <form action="/logIn" method="POST"  class="add-form">
+
+            <div class="form-group">
+                <!-- <label>نام کاربری خود را وارد کنید</label> -->
+                <input class="ph" type="text" name="userName" placeholder="نام کاربری خود را وارد کنید " required>
+            </div>
+
+            <div class="form-group">
+                <!-- <label>رمز عبور خود را وارد کنید</label> -->
+                <input class="ph" type="password" name="password" placeholder="رمز عبور خود را وارد کنید" required>
+            </div>            
+                
+            <button type="submit" class="button">ورود کاربر </button>
+        </form>
+    </div>
+</body>
+
+</html>

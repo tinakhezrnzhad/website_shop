@@ -7,20 +7,6 @@ class user:
     def __init__(self):
         self.connection = sqlite3.connect("StoreRoom.db")
         self.cursor = self.connection.cursor()
-
-        # self.cursor.execute("""
-        # CREATE TABLE IF NOT EXISTS login (
-        #     id INTEGER PRIMARY KEY AUTOINCREMENT,
-        #     Name TEXT,
-        #     lastName TEXT,
-        #     phoneNumber TEXT,
-        #     password TEXT,
-        #     address TEXT,
-        #     userName TEXT, 
-        #     role TINYINT
-        # )
-        # """)
-        
         self.cursor.execute("""
                 CREATE TABLE IF NOT EXISTS users (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -76,32 +62,15 @@ class user:
         else:
             msg.showerror("خطا", "نام کاربری یا پسورد اشتباه است.")
         
-        # msg.showinfo("" , "user added")
     def tkinterLogin(self):       
         self.win=tk.Tk()
         self.win.title("ورود به نرم افزار")
         self.win.geometry("500x300")
-
-        # tk.Label(win , text="نام :").grid(row=1, column=1)
-        # name = tk.Entry(win)
-        # name.grid(row=1, column=0, padx=5, pady=5)
-
-        # tk.Label(win , text="نام خانوادگی :").grid(row=2, column=1)
-        # last_name = tk.Entry(win)
-        # last_name.grid(row=2, column=0, padx=5, pady=5)
-        
-        # tk.Label(win , text="شماره ی تلفن :").grid(row=3, column=1)
-        # phone = tk.Entry(win)
-        # phone.grid(row=3, column=0, padx=5, pady=5)
         
         tk.Label(self.win , text="پسورد:").grid(row=4, column=1)
         self.password = tk.Entry(self.win , show='*')
         self.password.grid(row=4, column=0, padx=5, pady=5)
-        
-        # tk.Label(win , text="آدرس:").grid(row=5, column=1)
-        # address = tk.Entry(win)
-        # address.grid(row=5, column=0, padx=5, pady=5)
-        
+
         tk.Label(self.win , text="نام کاربری:").grid(row=6, column=1)
         self.userName = tk.Entry(self.win)
         self.userName.grid(row=6, column=0, padx=5, pady=5)
@@ -112,3 +81,13 @@ class user:
         self.win.mainloop()
 userPatern=user()
 userPatern.tkinterLogin()
+
+
+
+
+
+
+
+
+
+

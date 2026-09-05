@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html dir="ltr">
-    <head>
-        <title>Tina Shop</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/store.css') }}">
-        <!-- <link rel="stylesheet" href="/static/css/store.css"> -->
-        <meta name="viewport" content="with=device-width , initial-scale=1.0">
-    </head>
+
+<head>
+    <title>Tina Shop</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/store.css') }}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
 <body>
 
@@ -13,14 +15,13 @@
 
     <div class="topbar">
 
-        <div class="navbar-fixed">  
-          <h1 class="logo">☆꧁𝓉ίŇ𝓪꧂☆</h1> 
+        <div class="navbar-fixed">
+            <h1 class="logo">Tina Shop</h1>
         </div>
 
-        
         <nav class="top-links">
-             <a href="./about.html">About Us</a>
-             <a href="./places.html">Other Places</a> 
+            <a href="{{ url_for('a_me') }}">About Us</a>
+            <a href="./places.html">Other Places</a>
         </nav>
 
         <div class="search-box">
@@ -29,41 +30,54 @@
         </div>
 
         <div class="phone">
-            <label>Phone Number:</label>
+            <label>Phone:</label>
 
             <select>
                 <option>09999999999</option>
                 <option>09123456789</option>
             </select>
-
         </div>
 
     </div>
 
-    <section class="welcome">
-         <h2>🌸 Welcome To Tina Shop 🌸</h2>
-         <p>Find your favorite products here!</p> 
-    </section>
-
 </header>
 
 
-<section class="banner">
+<!-- ================= HERO ================= -->
 
-    <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Banner Image">
+<section class="hero">
+
+    <p class="hero-small">WELCOME TO</p>
+
+    <h2>Tina Shop</h2>
+
+    <p class="hero-text">
+        Find your favorite products in one place.
+    </p>
 
 </section>
 
 
+<!-- ================= BUTTONS ================= -->
+
 <div class="buttons">
 
-    <a href="">Sign In </a>
-    <a href="">Log In </a>
-    <a href="{{ url_for('show_products') }}">Show products</a>
-    <a href="">What you buy </a>
-    <a href="">Conversation</a>
+    <a href="{{ url_for('signup') }}">Sign In</a>
+
+    <a href="{{ url_for('login') }}">Log In</a>
+
+    <a href="{{ url_for('show_products') }}">Show Products</a>
+
+    <a href="{{ url_for('show_cart') }}">Your Cart</a>
+
+    <a href="#">Conversation</a>
+
+    <a href="{{ url_for('admin_login') }}">
+        Admin Panel
+    </a>
 
 </div>
+
 
 </body>
 

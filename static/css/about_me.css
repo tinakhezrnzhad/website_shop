@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    /* واحد نسبی برای تغییر سایز نسبت به محتویات است در اینجا یعنی 100 درصد ارتفاع */
+    background: #f4f5f7;
+    color: #1f2937;
+}
+
+.topbar {
+    width:94%;
+    margin: 20px auto;
+    padding: 15px 22px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    /* یعنی در هر چهار طرف یک مارجین 20 پیکسل داشته باشیم  */
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    color: #111827;
+    font-size: 27px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.top-links {
+    display: flex;
+    gap: 10px;
+}
+
+.top-links a {
+    padding: 8px 14px;
+    color: #374151;
+    text-decoration: none;
+    /* برای اینکه به صورت لینک نمایش داده نشود  */
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+
+    border-radius: 8px;
+    transition: 0.25s;
+    /* این برای انیمیشن است که میگه از اول ارام در میان تند و در اخر هم دوباره تند برو حرکت کن  */
+}
+
+.top-links a:hover {
+    color: white;
+    background: #111827;
+    border-color: #111827;
+}
+
+.search-box {
+    display: flex;
+    gap: 8px;
+}
+
+.search-box input {
+    width: 230px;
+    height: 38px;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #f9fafb;
+}
+
+.search-box input:focus {
+    border-color: #6b7280;
+    background: white;
+}
+
+
+.search-box button {
+    width:70px ;
+    border:none;
+    border-radius:8px;
+    background: #111827;
+    color: white;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.search-box button:hover {
+    background: #374151;
+}
+
+.phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.phone label {
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+.phone select {
+    height: 36px;
+    padding: 5px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    color: #374151;
+    background:white;
+}
+
+
+/* =========================
+   About Me Container
+========================= */
+
+.about-container {
+    width: 94%;
+    margin: 35px auto;
+    padding: 30px;
+
+    background: #ffffff;
+    border-radius: 20px;
+}
+
+.about-container h2 {
+    margin-bottom: 30px;
+
+    color: #111827;
+    text-align: center;
+
+    font-size: 32px;
+}
+
+
+/* =========================
+   Language Cards
+========================= */
+
+.language-card {
+    margin-bottom: 25px;
+    padding: 25px;
+
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    transition: 0.25s;
+}
+
+.language-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.language-card h3 {
+    margin-bottom: 20px;
+
+    color: #111827;
+    font-size: 21px;
+}
+
+.language-card p {
+    margin-bottom: 16px;
+
+    color: #4b5563;
+
+    font-size: 15px;
+    line-height: 2;
+}
+
+.language-card p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Persian */
+
+.persian {
+    text-align: right;
+}
+
+
+/* Other languages */
+
+.language-card:not(.persian) {
+    text-align: left;
+}
+
+
+/* =========================
+   Responsive Design
+========================= */
+
+@media (max-width: 1000px) {
+
+    .topbar {
+        justify-content: center;
+    }
+
+    .logo {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .topbar {
+        width: 95%;
+        padding: 18px 14px;
+    }
+
+    .top-links {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .phone {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .about-container {
+        width: 95%;
+        padding: 16px;
+    }
+
+    .language-card {
+        padding: 18px;
+    }
+
+    .about-container h2 {
+        font-size: 27px;
+    }
+}
+

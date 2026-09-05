@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html dir="ltr">
+    <head>
+        <title>Tina Shop products</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
+        <meta name="viewport" content="with=device-width , initial-scale=1.0">
+    </head>
+
+    <body>
+        <header>
+            <div class="topbar">
+
+                <div class="navbar-fixed">
+                    <h1 class="logo">Tina Shop</h1>
+                </div>
+
+                <nav class="top-links">
+                    <a href="{{ url_for('admin_p') }}">Admin Panel</a>
+                    <a href="{{ url_for('index') }}">Home</a>
+                </nav>
+
+                <div class="search-box">
+                    <input type="text" placeholder="Search user...">
+                    <button type="button">Search</button>
+                </div>
+
+            </div>
+        </header>
+
+        <section class="product-container">
+            <h2>Our Products</h2>
+
+            <div class="products-grid">
+                {% for product in xy %}
+                    <article class="product-card">
+
+                        <div class="product-image">
+                            {% if product.image_file %}
+                                <img
+                                    src="{{ url_for('static', filename='uploads/' + product.image_file) }}"
+                                    alt="{{ product.name }}"
+                                >
+                            {% else %}
+                                <img
+                                    src="{{ url_for('static', filename='images/no-image.jpg') }}"
+                                    alt="No Image Available"
+                                >
+                            {% endif %}
+                        </div>
+
+                        <div class="product-info">
+                            <h3>{{ product.name }}</h3>
+
+                            <p class="description">{{ product.description }}</p>
+
+                            <p class="price">{{ "{:,.0f}".format(product.price) }} تومان</p>
+
+                            <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="POST">
+                                <button type="submit" class="add-to-cart">Add to Cart</button>
+                            </form>
+                        </div>
+
+                    </article>
+                {% else %}
+                    <p class="empty-message">
+                        No products found. Please check back later!
+                    </p>
+                {% endfor %}
+            </div>
+        </section>
+
+        
+    </body>

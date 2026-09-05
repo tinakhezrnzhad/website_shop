@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Orders - Tina Shop
+    </title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/succes_order.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         MAIN CONTAINER
+    ========================== -->
+
+    <main class="success-container">
+
+
+        <!-- =========================
+             SUCCESS ICON
+        ========================== -->
+
+        <div class="success-icon">
+
+            ✓
+
+        </div>
+
+
+        <!-- =========================
+             TITLE
+        ========================== -->
+
+        <h1>
+
+            سفارش شما با موفقیت ثبت شد! 🎉
+
+        </h1>
+
+
+        <p class="success-message">
+
+            از خرید شما از Tina Shop متشکریم.
+
+        </p>
+
+
+        <!-- =========================
+             ORDER INFORMATION
+        ========================== -->
+
+        <div class="order-info">
+
+
+            <div class="info-row">
+
+                <span>
+                    شماره سفارش
+                </span>
+
+                <strong>
+                    #{{ order.id }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    مبلغ کل
+                </span>
+
+                <strong>
+
+                    {{ "{:,.0f}".format(order.total_price) }}
+
+                    تومان
+
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    وضعیت سفارش
+                </span>
+
+                <strong class="status">
+
+                    {{ order.status }}
+
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =========================
+             BUTTONS
+        ========================== -->
+
+        <div class="actions">
+
+
+            <a href="{{ url_for('show_products') }}"
+               class="continue-button">
+
+                ادامه خرید
+
+            </a>
+
+
+            <a href="{{ url_for('index') }}"
+               class="home-button">
+
+                بازگشت به صفحه اصلی
+
+            </a>
+
+
+        </div>
+
+
+    </main>
+
+
+</body>
+
+</html>

@@ -1,0 +1,319 @@
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tina Shop | About Me</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about_me.css') }}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="topbar">
+
+            <h1 class="logo">Tina Shop</h1>
+
+            <nav class="top-links">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="./places.html">Other Places</a>
+            </nav>
+
+            <div class="search-box">
+                <input type="text" placeholder="Search product...">
+                <button>Search</button>
+            </div>
+
+            <div class="phone">
+                <label for="phone">Phone Number:</label>
+
+                <select id="phone">
+                    <option>09999999999</option>
+                    <option>09123456789</option>
+                </select>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- About Me -->
+    <main class="about-container">
+
+        <h2>About Me</h2>
+
+
+        <!-- Persian -->
+        <section class="language-card persian" dir="rtl">
+
+            <h3>🇮🇷 فارسی</h3>
+
+            <p>
+                سلام! من <strong>تینا</strong> هستم؛ دانش‌آموز رشته‌ی شبکه و نرم‌افزار و
+                یکی از علاقه‌مندی‌های اصلی من دنیای برنامه‌نویسیه. 💻
+            </p>
+
+            <p>
+                در کنار درس و مدرسه، به چیزهای مختلفی علاقه دارم؛ از برنامه‌نویسی و ورزش
+                گرفته تا گیتار زدن. الان در مسیر یادگیری برنامه‌نویسی هستم و با انجام
+                پروژه‌های کوچک و دانش‌آموزی، سعی می‌کنم چیزهایی که یاد می‌گیرم رو به
+                دنیای واقعی وارد کنم.
+            </p>
+
+            <p>
+                یکی از ویژگی‌های بارز من <strong>کنجکاوی بیش از حد! 😂</strong> هست.
+                وقتی چیزی توجهم رو جلب می‌کنه، معمولاً دوست دارم تا جایی که می‌شه
+                درباره‌ش بدونم و از همه‌چیش سر دربیارم.
+            </p>
+
+            <p>
+                شاید بعضی وقت‌ها این کنجکاوی روی مخ باشه، ولی فکر می‌کنم همین ویژگی
+                باعث می‌شه همیشه دنبال یاد گرفتن چیزهای جدید باشم.
+            </p>
+
+            <p>
+                هدفم اینه که در آینده به یک <strong>برنامه‌نویس خفن</strong> تبدیل بشم؛
+                البته هدف اصلی یه راز کوچیکه... 🤫
+            </p>
+
+            <p>
+                خارج از دنیای کامپیوتر هم به کره‌ی جنوبی، اسپانیا و ایتالیا علاقه‌ی
+                زیادی دارم و طبیعتاً غذاهای این کشورها هم جزو علاقه‌مندی‌هامن؛
+                مخصوصاً پاستا، نودل و پیتزا! 🍝🍜🍕
+            </p>
+
+            <p>
+                در کنار انگلیسی، تازه شروع کردم به یادگیری کره‌ای و اسپانیایی و
+                امیدوارم در آینده بتونم این زبان‌ها رو هم به خوبی یاد بگیرم.
+            </p>
+
+            <p>
+                فعلاً دارم یاد می‌گیرم، تجربه می‌کنم، پروژه می‌سازم و قدم‌به‌قدم جلو می‌رم. 🚀
+            </p>
+
+        </section>
+
+
+        <!-- English -->
+        <section class="language-card" dir="ltr">
+
+            <h3>🇬🇧 English</h3>
+
+            <p>
+                Hi! I’m <strong>Tina</strong>, a student studying
+                <strong>Network and Software</strong> at school, and one of my
+                biggest interests is the world of programming. 💻
+            </p>
+
+            <p>
+                Besides studying, I enjoy many different things, from programming
+                and sports to playing the guitar. I’m currently learning programming
+                and working on small student projects to turn what I learn into
+                real-world experience.
+            </p>
+
+            <p>
+                One of my most noticeable personality traits is my
+                <strong>extreme curiosity! 😂</strong>
+                Whenever something catches my attention, I usually want to learn
+                everything I possibly can about it.
+            </p>
+
+            <p>
+                Sometimes this curiosity can be a little annoying—even to myself!—
+                but I think it’s also what keeps me constantly looking for new
+                things to learn.
+            </p>
+
+            <p>
+                My goal is to become an <strong>awesome programmer</strong> in the future.
+                Although... my main goal is a little secret. 🤫
+            </p>
+
+            <p>
+                Outside the world of computers, I’m really interested in
+                <strong>South Korea, Spain, and Italy</strong>, and naturally,
+                I love the food from these countries too—especially pasta,
+                noodles, and pizza! 🍝🍜🍕
+            </p>
+
+            <p>
+                Along with English, I’ve recently started learning Korean and
+                Spanish, and I hope to become good at these languages in the future.
+            </p>
+
+            <p>
+                For now, I’m learning, experimenting, building projects,
+                and moving forward one step at a time. 🚀
+            </p>
+
+        </section>
+
+
+        <!-- Korean -->
+        <section class="language-card korean" dir="ltr">
+
+            <h3>🇰🇷 한국어</h3>
+
+            <p>
+                안녕하세요! 저는 <strong>티나</strong>입니다.
+                학교에서 <strong>네트워크 및 소프트웨어</strong>를 공부하고 있고,
+                제가 가장 관심을 가지고 있는 분야 중 하나는 프로그래밍입니다. 💻
+            </p>
+
+            <p>
+                공부 외에도 저는 다양한 것에 관심이 있습니다.
+                프로그래밍과 운동부터 기타 연주까지 여러 가지를 즐기고 있어요.
+            </p>
+
+            <p>
+                현재 프로그래밍을 배우고 있으며, 작은 학생 프로젝트들을 만들어
+                보면서 배운 내용을 실제 경험으로 연결하려고 노력하고 있습니다.
+            </p>
+
+            <p>
+                저를 가장 잘 표현하는 특징 중 하나는 바로
+                <strong>엄청난 호기심! 😂</strong>입니다.
+                무언가에 관심이 생기면 그걸 가능한 한 깊이 알아보고 싶어 하는 편이에요.
+            </p>
+
+            <p>
+                제 목표는 앞으로 <strong>멋진 프로그래머</strong>가 되는 것입니다.
+                물론… 진짜 최종 목표는 비밀이에요. 🤫
+            </p>
+
+            <p>
+                컴퓨터 외에도 대한민국, 스페인, 이탈리아에 정말 관심이 많고,
+                특히 파스타, 누들, 피자를 좋아해요! 🍝🍜🍕
+            </p>
+
+            <p>
+                영어와 함께 최근에는 한국어와 스페인어도 배우기 시작했습니다.
+                앞으로 이 언어들을 잘할 수 있게 되는 것이 목표예요.
+            </p>
+
+            <p>
+                지금은 배우고, 직접 해보고, 프로젝트를 만들면서
+                한 걸음씩 앞으로 나아가고 있습니다. 🚀
+            </p>
+
+        </section>
+
+
+        <!-- Spanish -->
+        <section class="language-card" dir="ltr">
+
+            <h3>🇪🇸 Español</h3>
+
+            <p>
+                ¡Hola! Soy <strong>Tina</strong>, estudiante de
+                <strong>Redes y Software</strong>, y una de mis mayores pasiones
+                es el mundo de la programación. 💻
+            </p>
+
+            <p>
+                Además de estudiar, me gustan muchas cosas diferentes, desde la
+                programación y el deporte hasta tocar la guitarra.
+            </p>
+
+            <p>
+                Actualmente estoy aprendiendo programación y realizando pequeños
+                proyectos estudiantiles para convertir lo que aprendo en
+                experiencia práctica.
+            </p>
+
+            <p>
+                Una de las características que mejor me define es mi
+                <strong>curiosidad extrema 😂</strong>.
+                Cuando algo llama mi atención, normalmente quiero saber todo
+                lo posible sobre ello.
+            </p>
+
+            <p>
+                Mi objetivo es convertirme en una
+                <strong>programadora increíble</strong> en el futuro.
+                Aunque... mi objetivo principal es un pequeño secreto. 🤫
+            </p>
+
+            <p>
+                Fuera del mundo de los ordenadores, me interesan muchísimo
+                Corea del Sur, España e Italia, y también me encanta la comida
+                de estos países, especialmente la pasta, los noodles y la pizza. 🍝🍜🍕
+            </p>
+
+            <p>
+                Además del inglés, recientemente he empezado a aprender
+                coreano y español.
+            </p>
+
+            <p>
+                Por ahora, estoy aprendiendo, experimentando, creando proyectos
+                y avanzando paso a paso. 🚀
+            </p>
+
+        </section>
+
+
+        <!-- Italian -->
+        <section class="language-card" dir="ltr">
+
+            <h3>🇮🇹 Italiano</h3>
+
+            <p>
+                Ciao! Sono <strong>Tina</strong>, una studentessa di
+                <strong>Reti e Software</strong>, e una delle mie più grandi
+                passioni è il mondo della programmazione. 💻
+            </p>
+
+            <p>
+                Oltre allo studio, mi interessano tante cose diverse,
+                dalla programmazione e lo sport al suonare la chitarra.
+            </p>
+
+            <p>
+                Attualmente sto imparando a programmare e sto lavorando a
+                piccoli progetti scolastici per trasformare ciò che imparo
+                in esperienza pratica.
+            </p>
+
+            <p>
+                Una delle caratteristiche che mi descrive meglio è la mia
+                <strong>curiosità estrema! 😂</strong>
+                Quando qualcosa attira la mia attenzione, di solito voglio
+                scoprirne il più possibile.
+            </p>
+
+            <p>
+                Il mio obiettivo è diventare una
+                <strong>programmatrice davvero forte</strong> in futuro.
+                Anche se... il mio vero obiettivo è un piccolo segreto. 🤫
+            </p>
+
+            <p>
+                Al di fuori del mondo dei computer, sono molto interessata
+                alla Corea del Sud, alla Spagna e all’Italia.
+                Adoro anche la loro cucina, soprattutto pasta, noodles e pizza! 🍝🍜🍕
+            </p>
+
+            <p>
+                Oltre all’inglese, ho recentemente iniziato a studiare
+                coreano e spagnolo.
+            </p>
+
+            <p>
+                Per ora, sto imparando, sperimentando, creando progetti
+                e andando avanti un passo alla volta. 🚀
+            </p>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
+```

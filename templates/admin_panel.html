@@ -1,0 +1,113 @@
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tina Shop Admin Panel</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_panel.css') }}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="admin-title">
+            <h2>Tina Shop</h2>
+            <p>Admin Panel</p>
+        </div>
+
+        <nav>
+            <ul>
+
+                <!-- مدیریت محصولات -->
+                {% if role == "super_admin" or role == "product_admin" %}
+                <li>
+                    <a href="{{ url_for('admin_products') }}">
+                        📦 Products
+                    </a>
+                </li>
+                {% endif %}
+
+                {% if role == "super_admin" or role == "product_admin" %}
+                <li>
+                    <a href="{{ url_for('add_product') }}">
+                        📦Add Products
+                    </a>
+                </li>
+                {% endif %}
+
+
+                <!-- مدیریت کاربران -->
+                {% if role == "super_admin" or role == "user_admin" %}
+                <li>
+                    <a href="{{ url_for('admin_users') }}">
+                        👥 Users
+                    </a>
+                </li>
+                {% endif %}
+
+
+                <!-- ثبت کاربر -->
+                <!-- فقط Super Admin -->
+                {% if role == "super_admin" %}
+                <li>
+                    <a href="{{ url_for('admin_signup') }}">
+                        ➕ Register User
+                    </a>
+                </li>
+                {% endif %}
+
+
+                <!-- سفارشات -->
+                {% if role == "super_admin" %}
+                <li>
+                    <a href="{{ url_for('admin_login') }}">
+                        🛒 Orders
+                    </a>
+                </li>
+                {% endif %}
+
+
+                <!-- تنظیمات -->
+                {% if role == "super_admin" %}
+                <li>
+                    <a href="{{ url_for('admin_p') }}">
+                        ⚙ Settings
+                    </a>
+                </li>
+                {% endif %}
+
+
+                <!-- خروج -->
+                <li>
+                    <a href="{{ url_for('admin_login') }}">
+                        🚪 Logout
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+
+    </aside>
+
+
+    <main class="content">
+
+        <h1>Welcome to Admin Panel</h1>
+
+        <p>
+            You are logged in as:
+            <strong>{{ role }}</strong>
+        </p>
+
+    </main>
+
+</body>
+
+</html>
+```

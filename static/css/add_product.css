@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('../images/view.jpg');
+  background-image: url('../images/pic-blur.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -39,7 +39,8 @@
 .add-form .ph{
  width: 97%;
  border-radius: 1rem;
- border: 3px solid rgba(197, 166, 119, 1);
+ background: rgba(255, 255, 255, 0.15);
+ border: 1px solid rgba(255, 255, 255, 0.25);
  font-family:inherit;
  padding: 1rem;
  font-size: 1rem;

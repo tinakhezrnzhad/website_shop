@@ -1,0 +1,72 @@
+
+/* صفحه اصلی */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+
+/* منوی کناری */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background-color: #222;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+
+/* عنوان پنل */
+.admin-title {
+    text-align: center;
+    color: white;
+    padding: 20px 0;
+    border-bottom: 1px solid #444;
+}
+
+.admin-title h2 {
+    margin: 0;
+}
+
+.admin-title p {
+    margin: 5px 0;
+}
+
+
+/* لیست منو */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+
+/* هر گزینه */
+.sidebar li {
+    margin: 5px 0;
+}
+
+
+/* لینک‌ها */
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* وقتی موس روی گزینه می‌رود */
+.sidebar a:hover {
+    background-color: #444;
+}
+
+
+/* قسمت اصلی صفحه */
+.content {
+    margin-left: 220px;
+    padding: 30px;
+}
+
