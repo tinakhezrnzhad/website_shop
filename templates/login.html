@@ -10,10 +10,13 @@
 </head>
 
 <body>
+
+    <div id="messageBox"></div>
     <div class="container">
+        
         <h2 class="title">ورود کاربران </h2>
 
-        <form action="/logIn" method="POST"  class="add-form">
+        <form id="loginForm" action="/logIn" method="POST"  class="add-form">
 
             <div class="form-group">
                 <!-- <label>نام کاربری خود را وارد کنید</label> -->
@@ -29,5 +32,56 @@
         </form>
     </div>
 </body>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault(); // جلوی رفرش شدن صفحه رو می‌گیریم
+        console.log("دکمه زده شد! عملیات شروع شد...");
+
+        const msgBox = document.getElementById('messageBox');
+        
+        // ۱. اطلاعات فرم رو جمع می‌کنیم
+        const formData = new FormData(e.target);
+
+        try {
+            // ۲. حالا اینجا به سرور دستور می‌دیم (این همون جاییه که response ساخته میشه!)
+            const response = await fetch('/logIn', {
+                method: 'POST',
+                body: formData
+            });
+
+            // ۳. حالا که response ساخته شده، می‌تونیم ازش جواب رو بگیریم
+            const result = await response.json(); 
+
+            // console.log("اینم نتیجه‌ای که از سرور اومد:", result);
+
+            // ۴. نمایش پیام
+            msgBox.innerText = result.message;
+            msgBox.classList.remove('success-style', 'error-style');
+
+            if (result.status === 'success') {
+                msgBox.classList.add('success-style'); // سبز
+            } else {
+                msgBox.classList.add('error-style'); // قرمز
+            }
+
+            // نمایش باکس
+            msgBox.style.display = 'block';
+
+            // غیب شدن بعد از ۳ ثانیه
+            setTimeout(() => { 
+                msgBox.style.display = 'none'; 
+            }, 3000);
+
+        } catch (error) {
+            // اگر اینترنت قطع بود یا سرور اصلاً جواب نداد، اینجا گیر می‌کنه
+            console.error("ای وای! یه مشکلی پیش اومد:", error);
+            msgBox.innerText = "خطای ارتباط با سرور!";
+            msgBox.classList.add('error-style');
+            msgBox.style.display = 'block';
+        }
+    });
+</script>
+
+
 
 </html>

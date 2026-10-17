@@ -1,0 +1,171 @@
+<table class="category-table">
+
+    <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>نام دسته اصلی</th>
+            <th>نام دسته فرعی</th>
+            <th>نام محصول</th>
+            <th>قیمت</th>
+            <th>برند</th>
+            <th>وزن</th>
+            <th>موجودی</th>
+            <th>توضیحات</th>
+            <th>وضعیت</th>
+            <th>ویرایش</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for product in products %}
+
+        <tr>
+
+            <td>{{ product.id }}</td>
+
+            <td>{{ product.sub_category.main_category.name}}</td>
+            <!-- با توجه به اسم محصول فرعی ای که بر اساس محصول اصلس انتخاب شده ایدی محصول اصلی را برگردان -->
+            <td>{{ product.sub_category.name }}</td>
+
+            <td>{{ product.name }}</td>
+
+            <td>{{ "{:,.0f}".format(product.price) }}</td>
+
+            <td>{{ product.brand or "-" }}</td>
+
+            <td>{{ product.weight or "-" }}</td>
+
+            <td>{{ product.Inventory or 0}}</td>
+
+            <td>{{ product.description or "-"}}</td>
+
+            <td>
+                {% if product.is_active %}
+                فعال
+                {% else %}
+                غیرفعال
+                {% endif %}
+            </td>
+
+            <td>
+                <!-- محتوایی که داخل دیته یلز قرار میدیم به صورت پیش فرض مخفی میشه و وقتی کاربر روی کلمه داخل سامری کلیک کرد میتونه اطلاعات را ببینه  -->
+                <details>
+                    <summary>ویرایش</summary>
+
+                    <form
+                        action="{{ url_for('edit_product', product_id=product.id) }}"
+                        method="POST"
+                    >
+
+                       <div class="form-group">
+                            <label for="product_name_{{ product.id }}">
+                                نام محصول
+                            </label>
+
+                            <input
+                                type="text"
+                                id="product_name_{{ product.id }}"
+                                name="product_name"
+                                value="{{ product.name }}"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price_{{ product.id }}">
+                                قیمت
+                            </label>
+
+                            <input
+                                type="number"
+                                id="price_{{ product.id }}"
+                                name="price"
+                                value="{{ product.price }}"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="brand_{{ product.id }}">
+                                برند
+                            </label>
+
+                            <input
+                                type="text"
+                                id="brand_{{ product.id }}"
+                                name="brand"
+                                value="{{ product.brand or '' }}"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="weight_{{ product.id }}">
+                                وزن
+                            </label>
+
+                            <input
+                                type="number"
+                                id="weight_{{ product.id }}"
+                                name="weight"
+                                value="{{ product.weight or '' }}"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inventory_{{ product.id }}">
+                                موجودی
+                            </label>
+
+                            <input
+                                type="number"
+                                id="inventory_{{ product.id }}"
+                                name="Inventory"
+                                value="{{ product.Inventory or 0 }}"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description_{{ product.id }}">
+                                توضیحات
+                            </label>
+
+                            <textarea
+                                id="description_{{ product.id }}"
+                                name="description"
+                            >{{ product.description or '' }}</textarea>
+                        </div>
+
+                        <button type="submit">
+                            ذخیره تغییرات
+                        </button>
+
+                    </form>
+                </details>
+            </td>
+
+            <td>
+                {% if product.is_active %}
+
+                <form action="{{ url_for('deactivate_product', product_id=product.id) }}" method="POST">
+                    <button type="submit" class="delete-btn"> غیرفعال </button>
+                </form>
+
+                {% else %}
+
+                <form action="{{ url_for('activate_product', product_id=product.id) }}" method="POST">
+                    <button type="submit" class="delete-btn">فعال</button>
+                </form>
+
+                {% endif %}
+
+                <button class="delete-btn">حذف</button>
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+

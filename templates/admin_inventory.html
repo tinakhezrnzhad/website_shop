@@ -1,0 +1,81 @@
+<table class="category-table">
+    <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>نام محصول</th>
+            <th>نام دسته</th>
+            <th>موجودی فعلی</th>
+            <th>وضعیت</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for product in products %}
+
+        <tr>
+
+            <!-- شناسه محصول -->
+            <td>
+                {{ product.id }}
+            </td>
+
+            <!-- نام محصول -->
+            <td>
+                {{ product.name }}
+            </td>
+
+            <!-- نام دسته -->
+            <td>
+                {{ product.sub_category.name }}
+            </td>
+
+            <!-- موجودی فعلی -->
+            <td>
+                {{ product.Inventory }}
+            </td>
+
+            <!-- وضعیت موجودی -->
+            <td>
+
+                {% if product.Inventory is none or product.Inventory == 0 %}
+
+                    <span class="status inactive">
+                        ناموجود
+                    </span>
+
+                {% elif product.Inventory <= 5 %}
+
+                    <span class="status processing">
+                        در حال اتمام
+                    </span>
+
+                {% else %}
+
+                    <span class="status active">
+                        موجود
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <!-- عملیات -->
+            <td>
+
+                <a
+                    href="#"
+                    class="edit-btn"
+                >
+                    ویرایش
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+</table>

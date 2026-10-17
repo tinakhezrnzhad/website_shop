@@ -1,0 +1,34 @@
+/* ظاهر select */
+.add-form select.ph {
+    width: 100%;
+    padding: 12px 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    background-color: #fafafa;
+    color: #555;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+
+    outline: none;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+/* وقتی select انتخاب می‌شود */
+.add-form select.ph:focus {
+    border-color: #777;
+    background-color: #fff;
+}
+
+/* گزینه‌های داخل select */
+.add-form select.ph option {
+    background-color: #fff;
+    color: #333;
+    padding: 10px;
+}

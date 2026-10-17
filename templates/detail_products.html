@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/product_detail.css') }}"
+    >
+
+    <title>
+        {{ product.name }} | Tina Shop
+    </title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/product_detail.css'
+        ) }}"
+    >
+
+</head>
+
+   <script>
+
+        function openSidebar() {
+
+            document
+                .getElementById("shopSidebar")
+                .classList.add("open");
+
+            document
+                .getElementById("sidebarOverlay")
+                .classList.add("open");
+
+        }
+
+
+        function closeSidebar() {
+
+            document
+                .getElementById("shopSidebar")
+                .classList.remove("open");
+
+            document
+                .getElementById("sidebarOverlay")
+                .classList.remove("open");
+
+        }
+
+    </script>
+
+<body>
+
+
+    <!-- =========================
+        Header
+    ========================== -->
+
+    <header>
+
+        <div class="topbar">
+
+            <div class="navbar_fixed">
+                <button  class="menu-button" type="button"  onclick="openSidebar()" >
+                    ☰
+                </button>
+            </div>
+
+            <a
+                href="{{ url_for('show_products') }}"
+                class="back-button"
+            >
+                ← بازگشت به محصولات
+            </a>
+
+            <h1 class="logo">
+                Tina Shop
+            </h1>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+        Product Detail
+    ========================== -->
+
+    <main class="product-detail-container">
+
+        <section class="product-detail">
+
+
+            <!-- =========================
+                Product Image
+            ========================== -->
+
+            <div class="product-detail-image">
+
+                {% if product.image_file %}
+
+                    <img
+                        src="{{ url_for(
+                            'static',
+                            filename='uploads/' + product.image_file
+                        ) }}"
+                        alt="{{ product.name }}"
+                    >
+
+                {% else %}
+
+                    <img
+                        src="{{ url_for(
+                            'static',
+                            filename='images/no-image.jpg'
+                        ) }}"
+                        alt="تصویر محصول موجود نیست"
+                    >
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- =========================
+                Product Information
+            ========================== -->
+
+            <div class="product-detail-info">
+
+
+                <!-- Brand -->
+
+                {% if product.brand %}
+
+                    <span class="product-brand">
+                        {{ product.brand }}
+                    </span>
+
+                {% endif %}
+
+
+                <!-- Name -->
+
+                <h1 class="product-name">
+                    {{ product.name }}
+                </h1>
+
+
+
+                <!-- Price -->
+
+                <div class="product-price">
+
+                    {{ "{:,.0f}".format(product.price) }}
+
+                    <span>
+                        تومان
+                    </span>
+
+                </div>
+
+
+
+                <!-- Weight -->
+
+                {% if product.weight %}
+
+                    <div class="product-detail-row">
+
+                        <strong>
+                            وزن:
+                        </strong>
+
+                        <span>
+                            {{ product.weight }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+
+                <!-- Category -->
+
+                {% if product.sub_category %}
+
+                    <div class="product-detail-row">
+
+                        <strong>
+                            دسته‌بندی:
+                        </strong>
+
+                        <span>
+                            {{ product.sub_category.main_category.name }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-detail-row">
+
+                        <strong>
+                            زیردسته:
+                        </strong>
+
+                        <span>
+                            {{ product.sub_category.name }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+
+                <!-- Inventory -->
+
+                <div class="product-detail-row">
+
+                    <strong>
+                        وضعیت:
+                    </strong>
+
+                    {% if product.Inventory > 0 %}
+
+                        <span class="available">
+                            موجود
+                        </span>
+
+                    {% else %}
+
+                        <span class="unavailable">
+                            ناموجود
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- Description -->
+
+                {% if product.description %}
+
+                    <div class="product-description">
+
+                        <h2>
+                            توضیحات محصول
+                        </h2>
+
+                        <p>
+                            {{ product.description }}
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+
+
+                <!-- =========================
+                    Add To Cart
+                ========================== -->
+
+                {% if product.Inventory > 0 %}
+
+                    <form
+                        action="{{ url_for(
+                            'add_to_cart',
+                            product_id=product.id
+                        ) }}"
+                        method="POST"
+                    >
+
+                        <button
+                            type="submit"
+                            class="add-to-cart"
+                        >
+                            افزودن به سبد خرید
+                        </button>
+
+                    </form>
+
+                {% else %}
+
+                    <button
+                        type="button"
+                        class="add-to-cart disabled"
+                        disabled
+                    >
+                        محصول ناموجود است
+                    </button>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+    </main>
+    <aside id="shopSidebar" class="shop-sidebar">
+
+
+            <!-- Sidebar Header -->
+
+            <div class="sidebar-header">
+
+                <h2>
+                    Tina Shop
+                </h2>
+
+                <button
+                    type="button"
+                    class="close-sidebar"
+                    onclick="closeSidebar()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- Sidebar Links -->
+
+            <nav class="sidebar-menu">
+
+
+                <a href="{{ url_for('index') }}">
+                    🏠
+                    <span>صفحه اصلی</span>
+                </a>
+
+
+                <a href="{{ url_for('show_cart') }}">
+                    🛒
+                    <span>سبد خرید</span>
+                </a>
+
+
+                <a href="{{ url_for('comments') }}">
+                    💬
+                    <span>نظرات</span>
+                </a>
+
+
+                <a href="{{ url_for('signup') }}">
+                    👤
+                    <span>ثبت نام</span>
+                </a>
+
+
+                <a href="{{ url_for('login') }}">
+                    🔑
+                    <span>ورود</span>
+                </a>
+
+                <a href="{{ url_for('admin_login') }}">
+                    👨‍💻
+                    <span>ادمین پنل</span>
+                </a>
+
+            </nav>
+        </aside>
+        <!-- لایه تاریک پشت منو -->
+        <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+
+</body>
+
+</html>

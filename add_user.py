@@ -45,10 +45,6 @@ class users:
         else:
             msg.showinfo("نام کاربری تکراری " , "این نام کاربری از قبل استفاده شده است ")
                
-        
-        
-        
-        
 
     def show_user(self , parent):
         dataWindow=tk.Toplevel(parent)

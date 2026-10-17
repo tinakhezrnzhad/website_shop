@@ -1,0 +1,107 @@
+<table class="category-table">
+    <thead>
+        <tr>
+            <th>شناسه</th> 
+            <th>شماره ی سفارش</th> 
+            <th>شناسه ی مشتری</th> 
+            <th>تاریخ</th> 
+            <th>مبلغ</th> 
+            <th>وضعیت</th> 
+            <th>مشاهده</th> 
+        </tr> 
+    </thead>
+    <tbody>
+
+        {% for order in orders %}
+
+        <tr>
+
+            <!-- شناسه سفارش -->
+            <td>
+                {{ order.id }}
+            </td>
+
+            <!-- شماره سفارش -->
+            <td>
+                #{{ order.id }}
+            </td>
+
+            <!-- شناسه مشتری -->
+            <td>
+                {{ order.user_id }}
+            </td>
+            <!-- تاریخ -->
+            <td>
+                {{ order.created_at.strftime('%Y/%m/%d - %H:%M') }}
+            </td>
+
+            <!-- مبلغ -->
+            <td>
+                {{ "{:,.0f}".format(order.total_price) }}
+                تومان
+            </td>
+
+            <!-- وضعیت -->
+            <td>
+
+                {% if order.status == "pending" %}
+
+                    <span class="status pending">
+                        در انتظار
+                    </span>
+
+                {% elif order.status == "confirmed" %}
+
+                    <span class="status confirmed">
+                        ثبت شده
+                    </span>
+
+                {% elif order.status == "processing" %}
+
+                    <span class="status processing">
+                        در حال آماده‌سازی
+                    </span>
+
+                {% elif order.status == "shipped" %}
+
+                    <span class="status shipped">
+                        ارسال شده
+                    </span>
+
+                {% elif order.status == "delivered" %}
+
+                    <span class="status delivered">
+                        تحویل داده شده
+                    </span>
+
+                {% elif order.status == "cancelled" %}
+
+                    <span class="status cancelled">
+                        لغو شده
+                    </span>
+
+                {% else %}
+
+                    <span class="status">
+                        {{ order.status }}
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <!-- مشاهده -->
+            <td>
+
+                <form action="{{ url_for('order_detail', order_id=order.id) }}" method="POST">
+                    <button type="submit" class="delete-btn"> مشاهده </button>
+                </form>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+    </table>

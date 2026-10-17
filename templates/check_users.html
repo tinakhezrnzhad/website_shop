@@ -1,0 +1,44 @@
+ <table class="category-table">
+
+        <thead>
+            <tr>
+                <th>شناسه</th>
+                <th>نام</th>
+                <th>نام خانوادگی</th>
+                <th>ایمیل یا شماره تلفن</th>
+                <th>نام کاربری</th>
+                <th>نقش</th>
+                <th>عملیات</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for user in users %}
+
+            <tr>
+                <td>{{ user.id }}</td>
+
+                <td>{{ user.first_name }}</td>
+
+                <td>{{ user.last_name }}</td>
+
+                <td>{{ user.phone_email }}</td>
+
+                <td>{{ user.username }}</td>
+
+                <td>{{ user.role }}</td>
+
+
+                <td>
+                    <button class="edit-btn">ویرایش</button>
+                    <button class="delete-btn">حذف</button>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>

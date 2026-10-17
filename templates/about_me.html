@@ -1,6 +1,6 @@
-```html
+
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html dir="rtl">
 
 <head>
     <meta charset="UTF-8">
@@ -11,26 +11,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
+<script>
+
+        function openSidebar() {
+
+            document
+                .getElementById("shopSidebar")
+                .classList.add("open");
+
+            document
+                .getElementById("sidebarOverlay")
+                .classList.add("open");
+
+        }
+
+
+        function closeSidebar() {
+
+            document
+                .getElementById("shopSidebar")
+                .classList.remove("open");
+
+            document
+                .getElementById("sidebarOverlay")
+                .classList.remove("open");
+
+        }
+
+    </script>
+
 <body>
 
     <!-- Header -->
     <header>
         <div class="topbar">
 
+            <div class="navbar_fixed">
+                    <button
+                        class="menu-button"
+                        type="button"
+                        onclick="openSidebar()"
+                    >
+                        ☰
+                    </button>
+
+            </div>
+
             <h1 class="logo">Tina Shop</h1>
 
             <nav class="top-links">
-                <a href="{{ url_for('index') }}">Home</a>
-                <a href="./places.html">Other Places</a>
+                <a href="{{ url_for('index') }}">خانه</a>
+                <a href="./places.html">شعبه های دیگر</a>
             </nav>
 
-            <div class="search-box">
-                <input type="text" placeholder="Search product...">
-                <button>Search</button>
-            </div>
+            <form class="search-box" role="search">
+                <input type="text" placeholder="جستجو کنید">
+                <button>جستجو</button>
+            </form>
 
             <div class="phone">
-                <label for="phone">Phone Number:</label>
+                <label for="phone">شماره تلفن </label>
 
                 <select id="phone">
                     <option>09999999999</option>
@@ -45,13 +85,13 @@
     <!-- About Me -->
     <main class="about-container">
 
-        <h2>About Me</h2>
+        <h1>درباره ی من </h1>
 
 
         <!-- Persian -->
         <section class="language-card persian" dir="rtl">
 
-            <h3>🇮🇷 فارسی</h3>
+            <h2>🇮🇷 فارسی</h2>
 
             <p>
                 سلام! من <strong>تینا</strong> هستم؛ دانش‌آموز رشته‌ی شبکه و نرم‌افزار و
@@ -102,7 +142,7 @@
         <!-- English -->
         <section class="language-card" dir="ltr">
 
-            <h3>🇬🇧 English</h3>
+            <h2>🇬🇧 English</h2>
 
             <p>
                 Hi! I’m <strong>Tina</strong>, a student studying
@@ -158,7 +198,7 @@
         <!-- Korean -->
         <section class="language-card korean" dir="ltr">
 
-            <h3>🇰🇷 한국어</h3>
+            <h2>🇰🇷 한국어</h2>
 
             <p>
                 안녕하세요! 저는 <strong>티나</strong>입니다.
@@ -208,7 +248,7 @@
         <!-- Spanish -->
         <section class="language-card" dir="ltr">
 
-            <h3>🇪🇸 Español</h3>
+            <h2>🇪🇸 Español</h2>
 
             <p>
                 ¡Hola! Soy <strong>Tina</strong>, estudiante de
@@ -262,7 +302,7 @@
         <!-- Italian -->
         <section class="language-card" dir="ltr">
 
-            <h3>🇮🇹 Italiano</h3>
+            <h2>🇮🇹 Italiano</h2>
 
             <p>
                 Ciao! Sono <strong>Tina</strong>, una studentessa di
@@ -312,8 +352,95 @@
 
         </section>
 
+        <article class="arange-btn">
+            <form action="{{ url_for('support') }}" method="GET">
+                <button
+                    class="support-button"
+                    type="submit"
+                >
+                    💬
+                </button>
+            </form>
+        </article>
+
     </main>
+            <!-- =========================
+            Sidebar
+        ========================= -->
+
+        <aside id="shopSidebar" class="shop-sidebar">
+
+
+            <!-- Sidebar Header -->
+
+            <div class="sidebar-header">
+
+                <h2>
+                    Tina Shop
+                </h2>
+
+                <button
+                    type="button"
+                    class="close-sidebar"
+                    onclick="closeSidebar()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- Sidebar Links -->
+
+            <nav class="sidebar-menu">
+
+
+                <a href="{{ url_for('index') }}">
+                    🏠
+                    <span>صفحه اصلی</span>
+                </a>
+
+
+                <a href="{{ url_for('show_cart') }}">
+                    🛒
+                    <span>سبد خرید</span>
+                </a>
+
+
+                <a href="#">
+                    💬
+                    <span>مکالمه و پشتیبانی</span>
+                </a>
+
+
+                <a href="#">
+                    👤
+                    <span>ثبت نام</span>
+                </a>
+
+
+                <a href="#">
+                    🔑
+                    <span>ورود</span>
+                </a>
+
+                <a href="{{ url_for('admin_login') }}">
+                    👨‍💻
+                    <span>ادمین پنل</span>
+                </a>
+
+            </nav>
+
+
+        </aside>
+
+
+
+        <!-- لایه تاریک پشت منو -->
+
+        <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+
 
 </body>
 </html>
-```

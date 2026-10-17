@@ -1,0 +1,72 @@
+    <div class="container">
+        <h2 class="title">افزودن محصول فرعی</h2>
+
+        <form action="{{ url_for('add_sub_product') }}" method="POST" class="add-form" onsubmit="submitForm(event, this)">
+
+            <div class="form-group">
+
+                <select class="ph" name="main_category_id" required>
+                     <!-- این را فقط برای نوشته ی راهنما قرار دادیم  -->
+                    <option value="" disabled selected>
+                        دسته اصلی را انتخاب کنید
+                    </option>
+
+                    {% for category in main_categories_list %}
+
+                        <option value="{{ category.id }}">
+                            {{ category.name }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <input class="ph" type="text" name="sub_category_name" placeholder="نام دسته ی فرعی محصول را وارد کنید" required>
+            </div>
+
+            <button type="submit" class="button">ثبت محصول فرعی</button>
+        </form>
+    </div>
+
+
+    <table class="category-table">
+
+        <thead>
+            <tr>
+                <th>شناسه</th>
+                <th>شناسه ی محصول اصلی</th>
+                <th>نام دسته ی اصل</th>
+                <th>نام دسته ی فرعی</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for category in categories %}
+
+            <tr>
+                <td>{{ category.id }}</td>
+
+                <td>{{ category.main_categories_id }}</td>
+
+                <td>{{ category.main_category.name }}</td>
+                <!-- به این خط توجه کن کتگوری میگه این جدولی که الان توش هستیم و مینکتگوری برمیگردد به جدول پدر اون جدولی که الان در ان هستیم و بعد نامی که در جدول پدر است را برگردان -->
+
+                <td>{{ category.name }}</td>
+
+                <td>
+                    <button class="edit-btn">ویرایش</button>
+                    <button class="delete-btn">حذف</button>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+

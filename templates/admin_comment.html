@@ -1,0 +1,64 @@
+<table class="category-table">
+
+    <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>شناسه کاربر</th>
+            <th>نام کاربر</th>
+            <th>نام خانوادگی کاربر</th>
+            <th>ایمیل</th>
+            <th>نظر</th>
+            <th>وضعیت تایید</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for comment in comments %}
+
+        <tr>
+
+            <td>{{ comment.id }}</td>
+
+            <td>{{ comment.user_id }}</td>
+
+            <td>{{ comment.user.first_name }}</td>
+
+            <td>{{ comment.user.last_name }}</td>
+
+            <td>{{ comment.user.phone_email }}</td>
+
+            <td>{{ comment.comment }}</td>
+
+            <td>
+                {% if comment.is_approved %}
+                    تایید شده
+                {% else %}
+                    در انتظار تایید
+                {% endif %}
+            </td>
+
+            <td>
+
+                {% if not comment.is_approved %}
+
+                <a href="{{ url_for('approve_comment', comment_id=comment.id) }}"  class="edit-btn" >
+                    تایید
+                </a>
+
+                {% endif %}
+
+                <a href="#" class="delete-btn" >
+                    حذف
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>

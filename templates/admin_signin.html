@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html dir="rtl">
 
-<head>
-    <title>Tina Shop admin sign in </title>
-    <!-- <link rel="stylesheet" href="/static/css/signin.css"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/signin.css') }}">
-
-    <meta name="viewport" content="with=device-width , initial-scale=1.0">
-</head>
-
-<body>
     <div class="container">
         <h2 class="title">ثبت نام کردن </h2>
 
-        <form action="/admin_register" method="POST" class="add-form">
+        <form action="{{ url_for('admin_signup') }}" method="POST" class="add-form">
 
             <div class="form-group">
                 <input class="ph" type="text" name="name" placeholder="نام خود را وارد کنید" required>
@@ -37,10 +26,12 @@
             </div>
 
             <div class="form-group">
-                <select name="role" id="role">
+                <select name="role" id="role" class="ph">
+                    <option value="" disabled selected>نقش ادمین را انتخاب کنید</option>
                     <option value="user">کاربر عادی</option>
                     <option value="product_admin">ادمین محصولات</option>
                     <option value="user_admin">ادمین کاربران</option>
+                    <option value="order_admin">ادمین سفارشات</option>
                 </select>
 
             </div>
@@ -48,6 +39,47 @@
             <button type="submit" class="button">ثبت کاربر</button>
         </form>
     </div>
-</body>
+    <table class="category-table">
 
-</html>
+        <thead>
+            <tr>
+                <th>شناسه</th>
+                <th>نام</th>
+                <th>نام خانوادگی</th>
+                <th>ایمیل یا شماره تلفن</th>
+                <th>نام کاربری</th>
+                <th>نقش</th>
+                <th>عملیات</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for user in users %}
+
+            <tr>
+                <td>{{ user.id }}</td>
+
+                <td>{{ user.first_name }}</td>
+
+                <td>{{ user.last_name }}</td>
+
+                <td>{{ user.phone_email }}</td>
+
+                <td>{{ user.username }}</td>
+
+                <td>{{ user.role }}</td>
+
+
+                <td>
+                    <button class="edit-btn">ویرایش</button>
+                    <button class="delete-btn">حذف</button>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>

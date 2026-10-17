@@ -1,3 +1,29 @@
+#messageBox {
+    position: fixed;        /* همیشه توی صفحه ثابت بمونه */
+    top: 20px;              /* از بالا ۲۰ پیکسل فاصله */
+    right: 20px;            /* از راست ۲۰ پیکسل فاصله */
+    padding: 15px 25px;     /* یه کم فضای داخلی که متن نچسبه به لبه‌ها */
+    border-radius: 10px;    /* گوشه‌های گرد و ملوس */
+    color: white;           /* رنگ متن سفید باشه */
+    font-weight: bold;
+    display: none;          /* اولش مخفی باشه که صفحه رو زشت نکنه */
+    z-index: 9999;          /* بیاد روی همه چی */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* یه سایه ملایم که باکس جون بگیره */
+}
+
+/* این کلاس رو برای موفقیت استفاده می‌کنیم */
+.success-style {
+    background-color: #2ecc71; /* سبزِ ملایم */
+    display: block ;/* وقتی این کلاس اضافه بشه، نمایش داده میشه */
+}
+
+/* این کلاس رو برای خطا استفاده می‌کنیم */
+.error-style {
+    background-color: #e74c3c; /* قرمزِ ملایم */
+    display: block ;
+}
+
+
 .container{
   display: flex;
   flex-direction: column;

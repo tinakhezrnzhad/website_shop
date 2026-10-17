@@ -1,0 +1,59 @@
+    <div class="container">
+        <h2 class="title">افزودن محصول </h2>
+
+        <form action="{{ url_for('add_company') }}" method="POST"  enctype="multipart/form-data"  class="add-form" onsubmit="submitForm(event, this)">
+            <div class="form-group">
+                <input class="ph" type="text" name="name" placeholder="نام شرکت را وارد کنید" required>
+            </div>
+            <div class="form-group">
+                <input class="ph" type="text" name="owner" placeholder="نام صاحب شرکت را وارد کنید" required>
+            </div>
+            <div class="form-group">
+                <input class="ph" type="text" name="adress" placeholder="آدرس شرکت را وارد کنید" >
+            </div>
+            <div class="form-group">
+                <input class="ph" type="number" name="telephone" placeholder="شماره تلفن شرکت را وارد کنید" required>
+            </div>
+
+            <button type="submit" class="button">ثبت شرکت</button>
+        </form>
+    </div>
+
+
+    <table class="category-table">
+
+        <thead>
+            <tr>
+                <th>شناسه</th>
+                <th>نام شرکت</th>
+                <th>نام صاحب شرکت</th>
+                <th>آدرس شرکت</th>
+                <th>شماره تلفن شرکت</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for company in companies %}
+
+            <tr>
+
+                <td>{{ company.id }}</td>
+                <td>{{ company.name }}</td>
+                <td>{{ company.owner }}</td>
+                <td>{{ company.adress }}</td>
+                <td>{{ company.telephone }}</td>
+                <td>
+                    <button class="edit-btn">ویرایش</button>
+                    <button class="delete-btn">حذف</button>
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+

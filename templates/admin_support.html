@@ -1,0 +1,40 @@
+
+<table class="category-table">
+
+        <thead>
+            <tr>
+                <th>شناسه</th>
+                <th>شناسه کاربر</th>
+                <th>نام کاربر</th>
+                <th>نام خانوادگی کاربر</th>
+                <th>ایمیل</th>
+                <th>پیام</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+
+        <tbody>
+             {% for message in messages %} 
+             <tr>
+                <td>{{ message.id }}</td>
+                <td>{{ message.User_id }}</td> 
+                <td>{{ message.user.first_name }}</td>
+                <td>{{ message.user.last_name }}</td>
+                <td>{{ message.user.phone_email }}</td>
+                <td>{{ message.message }}</td>
+
+                <td> 
+                    <a
+                        href="{{ url_for('admin_support_chat', user_id=message.user_id) }}"
+                        class="edit-btn"
+                    >
+                        پاسخ
+                    </a>
+                    <button class="edit-btn">نمایش</button> 
+                    <button class="delete-btn">حذف</button>
+                </td> 
+                </tr>
+                    {% endfor %} 
+        </tbody>
+
+    </table> 

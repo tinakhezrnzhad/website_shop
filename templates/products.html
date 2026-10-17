@@ -1,85 +1,428 @@
+
 <!DOCTYPE html>
-<html dir="ltr">
+<html lang="fa" dir="rtl">
+
     <head>
-        <title>Tina Shop products</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
-        <meta name="viewport" content="with=device-width , initial-scale=1.0">
+
+        <meta charset="UTF-8">
+
+        <title>Tina Shop Products</title>
+
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/products.css') }}"
+        >
+
     </head>
 
+
     <body>
+
+
+        <!-- =========================
+            Header
+        ========================== -->
+
         <header>
+
             <div class="topbar">
 
-                <div class="navbar-fixed">  
-                <h1 class="logo">Tina Shop</h1> 
-                </div>
+                <div class="navbar_fixed">
+                    <button  class="menu-button" type="button"  onclick="openSidebar()" >
+                        ☰
+                    </button>
 
+                </div>
+                <!-- Logo -->
+
+                <div class="navbar-fixed">
+                    <h1 class="logo">  Tina Shop  </h1>
+                </div>
+                <!-- Navigation -->
                 <nav class="top-links">
-                    <a href="{{ url_for('index') }}">Home</a> {# لینک برگشت به صفحه اصلی #}
-                    <a href="./places.html">Other Places</a> 
+                    <a href="{{ url_for('index') }}">  خانه  </a>
+                    <a href="{{ url_for('a_me') }}">   درباره ی من  </a>
                 </nav>
+                <!-- Search -->
+                <form class="search-box" role="search" method="post">
 
+                    <input type="text" placeholder="جستجو کنید" >
 
-                <div class="search-box">
-                    <input type="text" placeholder="Search product...">
-                    <button>Search</button>
-                </div>
+                    <button type="button">  جستجو  </button>
+
+                </form>
+
+                <!-- Phone -->
 
                 <div class="phone">
-                    <label>Phone Number:</label>
 
-                    <select>
-                        <option>09999999999</option>
-                        <option>09123456789</option>
+                    <label for="phone-number">  شماره تلفن  </label>
+
+                    <select id="phone-number">
+                        <option>  09999999999  </option>
+                        <option>   09123456789 </option>
+
                     </select>
 
                 </div>
+
 
             </div>
 
         </header>
 
-        <section class="product-container">
-            <h2>Our Products</h2>
 
-            <div class="products-grid">
-                {% for product in xy %}
-                    <article class="product-card">
 
-                        <div class="product-image">
-                            {% if product.image_file %}
-                                <img
-                                    src="{{ url_for('static', filename='uploads/' + product.image_file) }}"
-                                    alt="{{ product.name }}"
-                                >
-                            {% else %}
-                                <img
-                                    src="{{ url_for('static', filename='images/no-image.jpg') }}"
-                                    alt="No Image Available"
-                                >
-                            {% endif %}
-                        </div>
+        <!-- =========================
+            Products
+        ========================== -->
 
-                        <div class="product-info">
-                            <h3>{{ product.name }}</h3>
+        <main class="product-container">
 
-                            <p class="description">{{ product.description }}</p>
+            <!-- =========================
+                Category Bar
+            ========================== -->
 
-                            <p class="price">{{ "{:,.0f}".format(product.price) }} تومان</p>
+            <section class="category-bar">
 
-                            <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="POST">
-                                <button type="submit" class="add-to-cart">Add to Cart</button>
-                            </form>
-                        </div>
+                <a
+                    href="{{ url_for('show_products') }}"
+                    class="category-btn active"
+                >
+                    همه محصولات
+                </a>
 
-                    </article>
-                {% else %}
-                    <p class="empty-message">
-                        No products found. Please check back later!
-                    </p>
+                {% for category in categories %}
+
+                        <a
+                            href="{{ url_for('show_products', category_id=category.id) }}"
+                            class="category-btn"
+                        >
+                            {{ category.name }}
+                        </a>
+
                 {% endfor %}
-            </div>
-        </section>
 
-        
+                {% if request.args.get('category_id') %}
+                <!-- اگر دسته ی اصلی انتخاب شد  -->
+
+                    {% for category in categories %}
+
+                        {% if category.id == selected_category_id %}
+                        <!-- اگر این دسته همانی بود که کاربر میخواد ؟ -->
+
+                            <div class="sub-category-bar">
+
+                                {% for sub in category.sub_categories %}
+
+                                    <a
+                                        href="{{ url_for('show_products', sub_category_id=sub.id) }}"
+                                        class="sub-category-btn"
+                                    >
+                                        {{ sub.name }}
+                                    </a>
+
+                                {% endfor %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                {% endif %}
+
+            </section>
+
+            <section class="filter-section">
+
+                <!-- Search -->
+
+                <form class="product-search"  method="GET"  action="{{ url_for('show_products') }}" >
+
+                    <input  type="text" name="search" id="search" placeholder="جستجوی محصول..." >
+
+                    <button type="submit"> 🔍 جستجو  </button>
+
+                </form>
+
+
+                <!-- Filters -->
+
+                <div class="filter-bar">
+
+                    <div class="filter-item">
+
+                        <label for="availability">  موجودی:  </label>
+                        <form action="{{ url_for('show_products') }}" method="GET">
+                            <select id="availability" name="availability">
+                                <option value="all"> همه </option>
+                                <option value="available">  موجود  </option>
+                                <option value="unavailable">  ناموجود  </option>
+                            </select>
+                        </form>
+
+                    </div>
+
+                    <div class="filter-item">
+
+                        <label for="sort">  مرتب‌سازی:  </label>
+
+                        <form action="{{ url_for('show_products') }}" method="GET">
+                            <select id="sort" name="sort">
+                                <option value="default">  پیش‌فرض </option>
+                                <option value="newest">  جدیدترین  </option>
+                                <option value="price_low">  ارزان‌ترین </option>
+                                <option value="price_high">   گران‌ترین </option>
+                                <option value="name">  بر اساس نام </option>
+                                <option value="random">  تصادفی </option>
+                            </select>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </section>
+                
+            <!-- =========================
+                Products
+            ========================== -->
+
+            <section class="products-section">
+
+                <div class="products-header">
+
+                    <h2>   محصولات </h2>
+
+                    <span>  {{ products|length }} محصول </span>
+
+                </div>
+
+
+                <div class="products-grid">
+
+                    {% for product in products %}
+
+                        <!-- =========================
+                            Product Card
+                        ========================== -->
+
+                        <article class="product-card">
+
+
+                            <!-- Product Image -->
+
+                            <div class="product-image">
+                                <a
+                                    href="{{ url_for('product_detail', product_id=product.id) }}"
+                                >
+
+                                    {% if product.image_file %}
+
+                                        <img
+                                            src="{{ url_for(
+                                                'static',
+                                                filename='uploads/' + product.image_file
+                                            ) }}"
+                                            alt="{{ product.name }}"
+                                        >
+
+                                    {% else %}
+
+                                        <img
+                                            src="{{ url_for(
+                                                'static',
+                                                filename='images/no-image.jpg'
+                                            ) }}"
+                                            alt="No Image Available"
+                                        >
+
+                                    {% endif %}
+                                </a>
+                                <!-- Favorite -->
+
+                                <button  type="button"  class="favorite-btn" >
+                                    ♡
+                                </button>
+
+                            </div>
+
+                            <!-- Product Information -->
+
+                            <div class="product-info">
+
+                                {% if product.brand %}
+
+                                    <span class="product-brand">  {{ product.brand }}  </span>
+
+                                {% endif %}
+
+                                <h3 class="product-name">
+                                    <a
+                                        href="{{ url_for('product_detail', product_id=product.id) }}"
+                                    >
+                                     {{ product.name }} 
+                                    </a> 
+                                </h3>
+
+
+                                {% if product.description %}
+
+                                    <p class="product-description">  {{ product.description }}  </p>
+
+                                {% endif %}
+
+                                {% if product.weight %}
+
+                                    <p class="product-weight">  وزن:  {{ product.weight }}  </p>
+
+                                {% endif %}
+
+
+                                <div class="product-bottom">
+
+                                    <div class="product-price">
+                                        {{ "{:,.0f}".format(product.price) }}
+                                        <span> تومان  </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                    {% else %}
+                        <div class="empty-products">
+                            <p>  محصولی برای نمایش وجود ندارد.  </p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+
+            <article class="arange-btn">
+                <form action="{{ url_for('support') }}" method="GET">
+                    <button
+                        class="support-button"
+                        type="submit"
+                    >
+                        💬
+                    </button>
+                </form>
+            </article>
+        </main>
+        <!-- =========================
+            Sidebar
+        ========================= -->
+
+        <aside id="shopSidebar" class="shop-sidebar">
+
+
+            <!-- Sidebar Header -->
+
+            <div class="sidebar-header">
+
+                <h2>
+                    Tina Shop
+                </h2>
+
+                <button
+                    type="button"
+                    class="close-sidebar"
+                    onclick="closeSidebar()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- Sidebar Links -->
+
+            <nav class="sidebar-menu">
+
+
+                <a href="{{ url_for('index') }}">
+                    🏠
+                    <span>صفحه اصلی</span>
+                </a>
+
+
+                <a href="{{ url_for('show_cart') }}">
+                    🛒
+                    <span>سبد خرید</span>
+                </a>
+
+
+                <a href="{{ url_for('comments') }}">
+                    💬
+                    <span>نظرات</span>
+                </a>
+
+
+                <a href="{{ url_for('signup') }}">
+                    👤
+                    <span>ثبت نام</span>
+                </a>
+
+
+                <a href="{{ url_for('login') }}">
+                    🔑
+                    <span>ورود</span>
+                </a>
+
+                <a href="{{ url_for('admin_login') }}">
+                    👨‍💻
+                    <span>ادمین پنل</span>
+                </a>
+
+                <form action="{{ url_for('logout')}}" method="post">
+                    
+                    <button type="submit">خروج 🚪</button>
+                </form>
+
+            </nav>
+        </aside>
+        <!-- لایه تاریک پشت منو -->
+        <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+            <!-- این اسکریپت برای ساید بار است  -->
+        <script>
+
+            function openSidebar() {
+
+                document
+                    .getElementById("shopSidebar")
+                    .classList.add("open");
+
+                document
+                    .getElementById("sidebarOverlay")
+                    .classList.add("open");
+
+            }
+
+
+            function closeSidebar() {
+
+                document
+                    .getElementById("shopSidebar")
+                    .classList.remove("open");
+
+                document
+                    .getElementById("sidebarOverlay")
+                    .classList.remove("open");
+
+            }
+            document.getElementById('availability').addEventListener('change', function() {
+                this.form.submit();
+            });
+            document.getElementById('sort').addEventListener('change', function() {
+                this.form.submit();
+            });
+        </script>
     </body>
+</html>

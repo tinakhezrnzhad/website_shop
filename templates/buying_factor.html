@@ -1,0 +1,116 @@
+    <div class="container">
+        <h2 class="title">نمایش فاکتور خرید</h2>
+
+        <form action="{{ url_for('buyingFactor') }}" method="POST"  enctype="multipart/form-data"  class="add-form" onsubmit="submitForm(event, this)">
+            <div class="form-group">
+                <select class="ph" name="company_id" id="company" required >
+                     <!-- این را فقط برای نوشته ی راهنما قرار دادیم  -->
+                    <option value="" disabled selected>
+                        نام شرکت مورد نظر را وارد کنید
+                    </option>
+                    {% for company in companies %}
+                        <option value="{{ company.id }}">
+                            {{ company.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="button">گشتن برای محصولات شرکت</button>
+        </form>
+    </div>
+
+
+    <table class="category-table">
+
+        <thead>
+            <tr>
+                <th>شناسه فاکتور فروش</th>
+                <th>شناسه شرکت</th>
+                <th>نام شرکت</th>
+                <th>شناسه ی محصول</th>
+                <th>نام محصول</th>
+                <th>قیمت</th>
+                <th>برند</th>
+                <th>وزن</th>
+                <th>تعداد</th>
+                <th>توضیحات</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+
+        <tbody>
+             {% for factor in buying_factors %} 
+             <tr> <!-- شناسه فاکتور فروش --> 
+                <td>{{ factor.id }}</td>
+                <!-- شناسه کاربر --> 
+                <td>{{ factor.Company_id }}</td> 
+                <td>{{ factor.company.name}}</td>
+                <!-- شناسه محصول --> 
+                <td>{{ factor.Product_id }}</td>
+                <!-- نام محصول --> 
+                <td>{{ factor.product.name }}</td> 
+                <!-- قیمت --> 
+                <td>{{ factor.price }}</td>
+                <!-- برند --> 
+                <td>{{ factor.product.brand }}</td> 
+                <!-- وزن --> 
+                <td>{{ factor.product.weight }}</td> 
+                <!-- تعداد --> 
+                <td>{{ factor.quantity }}</td> 
+                <!-- توضیحات -->
+                <td>{{ factor.product.description }}</td> 
+                <!-- عملیات -->
+                <td> 
+                    <button class="edit-btn">نمایش فاکتور</button> 
+                    <button class="edit-btn">ویرایش</button> 
+                    <button class="delete-btn">حذف</button>
+                </td> 
+                </tr>
+                {% endfor %} 
+        </tbody>
+
+    </table>
+    <div class="container">
+    <h2 class="title">ثبت فاکتور خرید</h2>
+
+    <form action="{{ url_for('addBuyingFactor') }}" method="POST"  enctype="multipart/form-data"  class="add-form" onsubmit="submitForm(event, this)">
+        <div class="form-group">
+            <select class="ph" name="company_id" id="company" required >
+                    <!-- این را فقط برای نوشته ی راهنما قرار دادیم  -->
+                <option value="" disabled selected>
+                    نام شرکت مورد نظر را انتخاب کنید
+                </option>
+                {% for company in companies %}
+                    <option value="{{ company.id }}">
+                        {{ company.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="ph" name="product_id" id="product" required >
+                    <!-- این را فقط برای نوشته ی راهنما قرار دادیم  -->
+                <option value="" disabled selected>
+                    نام محصول مورد نظر را انتخاب کنید
+                </option>
+                {% for product in products %}
+                    <option value="{{ product.id }}">
+                        {{ product.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <input class="ph" type="number" name="price" placeholder="قیمت خرید" required >
+        </div>
+
+        <div class="form-group">
+            <input class="ph" type="number" name="quantity" placeholder="تعداد خرید" required >
+        </div>
+
+        <button type="submit" class="button">ثبت فاکتور خرید</button>
+    </form>
+</div>
+
+

@@ -14,6 +14,56 @@ body {
 }
 
 
+.support-button{
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #111827;
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    z-index: 1000;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+
+    transition: 0.25s ease;
+}
+
+.support-button:hover {
+
+    background: #3c3e41;
+    transform: scale(1.05);
+}
+
+.cart-error {
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 15px 20px;
+
+    background: #fff3f3;
+    border: 1px solid #ffb8b8;
+    border-radius: 12px;
+
+    color: #c62828;
+    font-size: 16px;
+    font-weight: bold;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
 /* =========================
    TOP BAR
 ========================= */
@@ -24,18 +74,19 @@ header {
 
 .topbar {
     width: 94%;
-    margin: auto;
-
-    min-height: 75px;
+    margin: 20px auto;
+    padding: 15px 22px;
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     padding: 15px 25px;
 
-    background: white;
+    background:#ffffff;
+    border: 2px solid #e5e7eb;
 
-    border-radius: 16px;
+    border-radius: 12px;
 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
 }
@@ -44,11 +95,9 @@ header {
 /* Logo */
 
 .logo {
-    margin: 0;
-
-    font-size: 30px;
     color: #111827;
-
+    font-size: 27px;
+    font-weight: bold;
     white-space: nowrap;
 }
 
@@ -58,25 +107,26 @@ header {
 .top-links {
     display: flex;
     gap: 10px;
-
-    margin-left: 100px;
 }
 
 .top-links a {
-    text-decoration: none;
+    padding: 8px 14px;
 
     color: #374151;
+    text-decoration: none;
 
-    padding: 10px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
 
-    border: 1px solid #dcdfe4;
-    border-radius: 10px;
+    background: #ffffff;
 
-    background: white;
+    transition: 0.25s ease;
 }
 
 .top-links a:hover {
-    background: #f3f4f6;
+    color: white;
+    background: #111827;
+    border-color: #111827;
 }
 
 
@@ -84,34 +134,44 @@ header {
 
 .search-box {
     display: flex;
-
-    margin-left: auto;
-
     gap: 8px;
 }
 
 .search-box input {
-    width: 245px;
+    width: 230px;
+    height: 38px;
 
-    padding: 11px 14px;
+    padding: 10px 12px;
 
-    border: 1px solid #d9dde3;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
 
-    border-radius: 10px;
-
-    font-size: 15px;
+    background: #f9fafb;
+    outline: none;
 }
 
+.search-box input:focus {
+    border-color: #6b7280;
+    background: white;
+}
+
+
 .search-box button {
-    padding: 10px 18px;
+    width: 70px;
 
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
 
     background: #111827;
     color: white;
 
     cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.search-box button:hover {
+    background: #374151;
 }
 
 
@@ -123,20 +183,26 @@ header {
 
     gap: 8px;
 
-    margin-left: 70px;
-
     white-space: nowrap;
 }
 
+.phone label {
+    color: #6b7280;
+    font-size: 14px;
+}
+
 .phone select {
-    padding: 10px;
+    height: 36px;
 
-    border: 1px solid #d9dde3;
+    padding: 5px 8px;
 
-    border-radius: 9px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
 
+    color: #374151;
     background: white;
 }
+
 
 
 /* =========================
@@ -637,4 +703,256 @@ header {
 
         text-align: center;
     }
+}
+
+
+/* =========================
+   Menu Button
+========================= */
+
+.menu-button {
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #111827;
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    z-index: 1000;
+
+    box-shadow:0 5px 15px rgba(0, 0, 0, 0.15);
+
+    transition: 0.25s ease;
+}
+
+
+.menu-button:hover {
+
+    background: #3c3e41;
+    transform: scale(1.05);
+}
+
+
+
+/* =========================
+   Sidebar
+========================= */
+
+.shop-sidebar {
+
+    position: fixed;
+
+    top: 0;
+    right: -320px;
+
+    width: 300px;
+    height: 100vh;
+
+    background: #ffffff;
+
+    z-index: 1100;
+
+    box-shadow:
+        -5px 0 20px rgba(0, 0, 0, 0.12);
+
+    transition: right 0.3s ease;
+
+    overflow-y: auto;
+}
+
+
+/* Sidebar وقتی باز است */
+
+.shop-sidebar.open {
+
+    right: 0;
+
+}
+
+
+
+/* =========================
+   Sidebar Header
+========================= */
+
+.sidebar-header {
+
+    height: 80px;
+
+    padding: 0 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: #111827;
+
+    color: white;
+}
+
+
+.sidebar-header h2 {
+
+    margin: 0;
+
+    font-size: 22px;
+
+}
+
+
+.close-sidebar {
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.close-sidebar:hover {
+
+    background: #1b443a;
+
+}
+
+
+
+/* =========================
+   Sidebar Menu
+========================= */
+
+.sidebar-menu {
+
+    padding: 20px 15px;
+
+}
+
+
+.sidebar-menu a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 15px;
+
+    margin-bottom: 8px;
+
+    border-radius: 10px;
+
+    color: #374151;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    transition: 0.25s ease;
+}
+
+
+.sidebar-menu a:hover {
+
+    background: #f3ead5;
+
+    color: #265c4e;
+
+    transform: translateX(-4px);
+
+}
+
+
+.sidebar-menu a span {
+
+    flex: 1;
+
+}
+
+
+
+/* =========================
+   Overlay
+========================= */
+
+.sidebar-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    z-index: 1050;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+
+/* Overlay وقتی Sidebar باز است */
+
+.sidebar-overlay.open {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 650px) {
+
+    .shop-sidebar {
+
+        width: 280px;
+
+        right: -280px;
+
+    }
+
+
+    .menu-button {
+
+        top: 15px;
+
+        right: 15px;
+
+        width: 45px;
+
+        height: 45px;
+
+    }
+
 }

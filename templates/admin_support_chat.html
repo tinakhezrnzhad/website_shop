@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>پشتیبانی</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 700px;
+            height: 90vh;
+
+            margin: 5vh auto;
+
+            background: white;
+
+            border-radius: 15px;
+
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
+
+            display: flex;
+            flex-direction: column;
+
+            overflow: hidden;
+        }
+
+
+        /* =====================
+           Header
+        ====================== */
+
+        .chat-header {
+            background: #111827;
+            color: white;
+
+            padding: 18px 20px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .chat-header span {
+            font-size: 13px;
+            color: #d1d5db;
+        }
+
+
+        /* =====================
+           Messages
+        ====================== */
+
+        .messages {
+            flex: 1;
+
+            padding: 20px;
+
+            overflow-y: auto;
+
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            max-width: 70%;
+
+            padding: 10px 14px;
+
+            border-radius: 12px;
+
+            line-height: 1.7;
+
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            align-self: flex-start;
+
+            background: #111827;
+            color: white;
+
+            border-bottom-left-radius: 3px;
+        }
+
+        .admin-message {
+            align-self: flex-end;
+
+            background: #e5e7eb;
+            color: #111827;
+
+            border-bottom-right-radius: 3px;
+        }
+
+        .message-time {
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 10px;
+
+            opacity: 0.6;
+        }
+
+
+        /* =====================
+           Empty
+        ====================== */
+
+        .empty-message {
+            text-align: center;
+
+            color: #6b7280;
+
+            margin-top: 100px;
+        }
+
+
+        /* =====================
+           Send Form
+        ====================== */
+
+        .send-box {
+            padding: 15px;
+
+            border-top: 1px solid #e5e7eb;
+
+            background: white;
+
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .send-box textarea {
+            flex: 1;
+
+            resize: none;
+
+            height: 50px;
+
+            padding: 12px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 10px;
+
+            font-family: inherit;
+
+            outline: none;
+        }
+
+        .send-box textarea:focus {
+            border-color: #111827;
+        }
+
+        .send-box button {
+            width: 80px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #111827;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-family: inherit;
+        }
+
+        .send-box button:hover {
+            background: #3c3e41;
+        }
+
+
+        /* =====================
+           Back
+        ====================== */
+
+        .back-button {
+            position: fixed;
+
+            top: 20px;
+            right: 20px;
+
+            text-decoration: none;
+
+            background: #111827;
+
+            color: white;
+
+            padding: 10px 15px;
+
+            border-radius: 10px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 10px 14px;
+            margin: 10px;
+            border-radius: 12px;
+        }
+
+        .user-message {
+            background: #dbeafe;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .admin-message {
+            background: #dcfce7;
+            margin-right: auto;
+            text-align: left;
+        }
+
+        .message p {
+            margin: 0;
+        }
+
+        .message small {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+            font-size: 11px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <a
+    href="{{ url_for('admin_support') }}"
+    class="back-button"
+    onclick="loadPage(event, this.href)"
+>
+    بازگشت
+</a>
+
+
+    <div class="chat-container">
+
+
+        <!-- Header -->
+
+        <div class="chat-header">
+
+            <div>
+
+                <h2>
+                    پشتیبانی Tina Shop
+                </h2>
+
+                <span>
+                   جواب های پشتیبانی
+                </span>
+
+            </div>
+
+            💬
+
+        </div>
+
+
+        <!-- Messages -->
+
+        <div class="messages">
+
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    {% if message.sender == "user" %}
+
+                        <div class="message user-message">
+                            <p>{{ message.message }}</p>
+                            <small>{{ message.created_at }}</small>
+                        </div>
+
+                    {% else %}
+
+                        <div class="message admin-message">
+                            <p>{{ message.message }}</p>
+                            <small>{{ message.created_at }}</small>
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% endif %}
+
+
+        </div>
+
+
+        <!-- Send Message -->
+
+        <form class="send-box" action="{{ url_for('admin_support_reply', user_id=user.id) }}" method="POST" >
+
+            <textarea  name="message"  placeholder="جواب خود را بنویسید..." required ></textarea>
+
+            <button type="submit">   ارسال </button>
+
+        </form>
+
+
+    </div>
+
+
+</body>
+
+</html>
+
